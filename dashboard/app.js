@@ -428,9 +428,9 @@
       ];
       html += '<h3>How the implied value is built' + (sandboxActive() ? ' (default weights — the sandbox value above uses your weights)' : '') + '</h3>';
       parts.forEach(function (p) {
-        html += '<div class="comp-bar"><span>' + p[0] + '</span><span class="track"><span class="fill" style="width:' + Math.max(2, Math.min(100, p[1] / p[2] * 100)) + '%"></span></span><span class="val">' + p[1].toFixed(3) + '×</span></div>';
+        html += '<div class="comp-bar"><span>' + p[0] + '</span><span class="track"><span class="fill" style="width:' + Math.max(2, Math.min(100, p[1] / p[2] * 100)) + '%"></span></span><span class="val">' + p[1].toFixed(4) + '×</span></div>';
       });
-      html += '<p class="cost-line">TVL ' + fmtMoney(r.tvl_usd) + ' × ' + r.family_multiple.toFixed(3) + ' × ' + r.growth_multiplier.toFixed(3) + ' × ' + r.maturity_multiplier.toFixed(3) + ' × ' + r.traction_multiplier.toFixed(3) + ' × ' + r.breadth_multiplier.toFixed(3) + ' = ' + fmtMoney(r.implied_value_usd) + '.</p>';
+      html += '<p class="cost-line">TVL ' + fmtMoney(r.tvl_usd) + ' × ' + r.family_multiple.toFixed(4) + ' × ' + r.growth_multiplier.toFixed(4) + ' × ' + r.maturity_multiplier.toFixed(4) + ' × ' + r.traction_multiplier.toFixed(4) + ' × ' + r.breadth_multiplier.toFixed(4) + ' ≈ ' + fmtMoney(r.implied_value_usd) + ' (multipliers rounded to 4 decimals).</p>';
       if (comps.length) {
         html += '<h3>Live comparables in the same family</h3>';
         var maxRatio = Math.max.apply(null, comps.map(function (c) { return c.mcap_tvl; }));

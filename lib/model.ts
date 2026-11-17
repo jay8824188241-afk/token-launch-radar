@@ -580,9 +580,12 @@ export function buildRadar(snapshot: Snapshot, model: ModelConstants = MODEL): {
   const live = liveRows(snapshot);
   const { table } = familyMultiples(snapshot, model);
   const preToken = snapshot.protocols.filter(isPreToken).length;
+  // The dashboard carries no network address: the snapshot's source line
+  // names its API endpoint, so the radar states the source without the URL.
+  const source = snapshot.source.replace('https://api.llama.fi/protocols', 'protocols API');
   const radar: RadarData = {
     as_of: snapshot.as_of,
-    source: snapshot.source,
+    source,
     floor_usd: snapshot.floor_usd,
     model,
     model_version: MODEL_VERSION,
