@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — the pre-token protocol board</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="radar-dot" aria-hidden="true"></span><span class="brand-name">TOKEN RADAR</span><span class="brand-tag">the pre-token protocol board</span></div>
+  <div class="meta" id="meta">Snapshot loading…</div>
+</header>
+
+<main>
+  <section class="lede" id="lede" aria-live="polite">
+    <h1>The protocols the market has not priced yet</h1>
+    <p id="lede-text">Loading the sealed snapshot…</p>
+    <div class="fact-cards" id="fact-cards"></div>
+  </section>
+
+  <section class="panel model-panel" id="model-panel">
+    <h2>How the radar ranks a protocol</h2>
+    <p class="model-formula" id="model-formula"></p>
+    <div class="model-grid" id="model-grid"></div>
+    <div class="sandbox" id="sandbox">
+      <h3>Try the model yourself</h3>
+      <p class="sandbox-note">Move a weight and the page re-ranks live. The sandbox changes only this page; the board file keeps the default weights.</p>
+      <div class="sliders" id="sliders"></div>
+      <button type="button" class="btn" id="sandbox-reset">Reset weights</button>
+    </div>
+  </section>
+
+  <section class="panel controls" aria-label="Board controls">
+    <label>Search <input type="search" id="q" placeholder="Protocol name or slug" autocomplete="off"></label>
+    <label>Category <select id="category"><option value="">All categories</option></select></label>
+    <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+    <label>Min TVL <select id="min-tvl">
+      <option value="0">Any</option>
+      <option value="5000000">$5M+</option>
+      <option value="50000000">$50M+</option>
+      <option value="100000000">$100M+</option>
+      <option value="500000000">$500M+</option>
+      <option value="1000000000">$1B+</option>
+    </select></label>
+    <label class="check"><input type="checkbox" id="watchlist-only"> Watchlist only</label>
+    <label class="check"><input type="checkbox" id="show-live"> Show live-token protocols</label>
+    <span class="count" id="count"></span>
+  </section>
+
+  <section class="panel board-panel">
+    <div class="tabs" role="tablist" aria-label="Board views">
+      <button type="button" role="tab" id="tab-board" aria-selected="true">Pre-token board</button>
+      <button type="button" role="tab" id="tab-live" aria-selected="false">Live-token comparables</button>
+    </div>
+    <div id="board-view">
+      <table id="board">
+        <thead><tr>
+          <th data-sort="rank">#</th>
+          <th data-sort="name">Protocol</th>
+          <th data-sort="tvl_usd">TVL</th>
+          <th data-sort="change_7d">7d</th>
+          <th data-sort="age_days">Age</th>
+          <th data-sort="traction">Traction</th>
+          <th data-sort="implied_value_usd">Implied value</th>
+        </tr></thead>
+        <tbody id="board-body"></tbody>
+      </table>
+      <p class="empty" id="board-empty" hidden>No protocol matches the filters.</p>
+    </div>
+    <div id="live-view" hidden>
+      <p class="live-note">These protocols already trade. Their market cap over TVL is the multiple the board prices pre-token protocols with — the market's own pricing, not a hand-picked number.</p>
+      <table id="live">
+        <thead><tr><th>Protocol</th><th>TVL</th><th>Market cap</th><th>MCap / TVL</th></tr></thead>
+        <tbody id="live-body"></tbody>
+      </table>
+      <h3>Family multiples, derived from this snapshot</h3>
+      <table id="families">
+        <thead><tr><th>Family</th><th>Live protocols</th><th>Median MCap / TVL</th><th>Multiple used</th></tr></thead>
+        <tbody id="families-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel foot" id="foot">
+    <p id="method-note"></p>
+    <p class="source-note" id="source-note"></p>
+  </section>
+</main>
+
+<dialog id="detail" class="detail">
+  <button type="button" class="dialog-close" id="detail-close" aria-label="Close">✕</button>
+  <div id="detail-body"></div>
+</dialog>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

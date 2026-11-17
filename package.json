@@ -1,0 +1,7 @@
+{
+  "name": "token-launch-radar",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Token Radar: ranks the pre-token protocols in a sealed DefiLlama snapshot by implied value.",
+  "license": "MIT"
+}
