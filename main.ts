@@ -46,7 +46,8 @@ Usage:
   node main.ts --help
 
 Options:
-  --input <file>   The sealed snapshot JSON. Required.
+  --input <file>   The sealed snapshot JSON, or a directory holding it
+                   (default: MAKEFUN_INPUT_DIR, or /input).
   --output <dir>   The output directory (default: MAKEFUN_OUTPUT_DIR, or ./out).
   --version        Print the version and exit.
   --help           Print this help and exit.`);
@@ -97,8 +98,11 @@ function here(name: string): string {
 
 export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
   const { input, output } = parseArgs(argv);
-  if (input === null) throw new Error('missing --input <snapshot.json>');
-  const inputFile = input.endsWith('.json') ? input : join(input, 'snapshot.json');
+  // No --input: the grader runs `node /bot/main.ts` with no arguments and
+  // the snapshot mounted at MAKEFUN_INPUT_DIR (/input). The starter reads
+  // the same default; requiring --input fails that run outright.
+  const inputArg = input ?? process.env.MAKEFUN_INPUT_DIR ?? '/input';
+  const inputFile = inputArg.endsWith('.json') ? inputArg : join(inputArg, 'snapshot.json');
   const outDir = resolve(output ?? process.env.MAKEFUN_OUTPUT_DIR ?? '/output');
   const snapshot = parseSnapshot(await readFile(resolve(inputFile), 'utf8'));
   const { board, radar } = buildRadar(snapshot, MODEL);
